@@ -78,48 +78,26 @@ const gerarPalavra = (optionValue) => {
 const iniciarJogo = () => {
     winCount = 0;
     count = 0;
-
     userInputSection.innerHTML = "";
     optionsContainer.innerHTML = "";
     letterContainer.classList.add("hide");
     newGameContainer.classList.add("hide");
     letterContainer.innerHTML = "";
-
     for (let i = 65; i < 91; i++) {
         let button = document.createElement("button");
         button.classList.add("letters");
         button.innerText = String.fromCharCode(i);
-        button.addEventListener("click", () => {
-            let charArray = chosenWord.split("");
-            let dashes = document.getElementsByClassName("dashes");
-            if (charArray.includes(button.innerText)) {
-                charArray.forEach((char, index) => {
-                    if (char === button.innerText) {
-                        dashes[index].innerText = char;
-                        winCount += 1;
-                        if (winCount == charArray.length) {
-                            resultText.innerHTML = `<h2 class='win-msg'>Você venceu!!</h2><p>A palavra era <span>${chosenWord}</span></p>`;
-                            bloquear();
-                        }
-                    }
-                });
-            } else {
-                count += 1;
-                desenharForca(count);
-                if (count == 6) {
-                    resultText.innerHTML = `<h2 class='lose-msg'>Você perdeu!!</h2><p>A palavra era <span>${chosenWord}</span></p>`;
-                    bloquear();
-                }
-            }
-            button.disabled = true;
-        });
+        button.onclick = function () {
+            // button click event code here
+        };
         letterContainer.append(button);
     }
-
     mostrarOpcoes();
-    let { iniciarDesenho } = canvasCriador();
+    let canvasCriadorObject = canvasCriador();
+    let iniciarDesenho = canvasCriadorObject.iniciarDesenho;
     iniciarDesenho();
 };
+
 
 const canvasCriador = () => {
     let context = canvas.getContext("2d");
